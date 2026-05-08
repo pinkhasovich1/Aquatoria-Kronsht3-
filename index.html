@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Акватория. Кронштейны 3 ярус</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.1/model-viewer.min.js"></script>
+    <style>
+        /* Стили для нашей страницы и 3D-просмотрщика */
+        body {
+            margin: 0;
+            overflow: hidden; /* Скрываем полосы прокрутки, так как модель будет занимать весь экран */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Минимальная высота - весь экран */
+            background-color: #cecece; /* Легкий серый фон */
+            font-family: sans-serif; /* Простой шрифт */
+            color: #000000;
+        }
+        model-viewer {
+            width: 100%; /* Ширина на весь экран */
+            height: 100vh; /* Высота на весь экран */
+            display: block; /* Важно для корректного отображения */
+            --poster-color: #ffffff; /* Цвет фона, пока модель загружается */
+            border: none; /* Убираем рамку по умолчанию */
+        }
+        .info-text {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(247, 247, 247, 0.8);
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 10; /* Убедимся, что текст поверх модели */
+            font-size: 14px;
+        }
+        .legend-color {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            margin-right: 6px;
+            border-radius: 3px;
+            vertical-align: middle;
+            border: 1px solid #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-text" id="infoText">
+        <div id="infoInstructions">
+        Поворачивайте: тяните одним пальцем.<br>
+        Масштабируйте: сводите/разводите два пальца.<br>
+        Панорамирование: тяните двумя пальцами.<br>
+        </div>
+        <button id="toggleInfo" style="display:block; margin:10px auto 0 auto; cursor:pointer; background:none; border:none; font-size:18px;">▲</button>
+        <div id="infoLegend">
+        <span class="legend-color" style="background: #A0522DFF"></span>- СК-1<br>
+        <span class="legend-color" style="background: #C30000FF"></span>- СК-2<br>
+        <span class="legend-color" style="background: #000879FF"></span>- Очередь 1 (сваривается из профильной трубы по месту)<br>
+        <span class="legend-color" style="background: rgb(28, 158, 35)"></span>- Очередь 2 (сваривается из профильной трубы по месту)<br>
+        <span class="legend-color" style="background: rgb(175, 2, 2)"></span>- Очередь 3<br>
+        <span class="legend-color" style="background: rgb(2, 135, 212)"></span>- Очередь 4<br>
+        <span class="legend-color" style="background: #4B0000FF"></span>- Очередь 5<br>
+        <span class="legend-color" style="background: rgb(2, 201, 2)"></span>- Очередь 6<br>
+        </div>
+    </div>
+
+    <model-viewer
+        src="aquakronsht321.glb"  alt="Акватория. Кронштейны 3 ярус"
+        camera-controls           
+        touch-action="pan-y"      
+        auto-rotate               
+        auto-rotate-delay="10000000"  
+        rotation-per-second="0.2rad" 
+        shadow-intensity="1"  
+        filter: contrast(2) brightness(1.1) saturate(1.1);    
+        environment-image="neutral" exposure="1"              
+        loading="eager"           ar                        
+        ar-modes="webxr scene-viewer quick-look" >
+    </model-viewer>
+<script>
+    const toggleBtn = document.getElementById('toggleInfo');
+    const infoLegend = document.getElementById('infoLegend');
+    let collapsed = false;
+    toggleBtn.addEventListener('click', function() {
+        collapsed = !collapsed;
+        if (collapsed) {
+            infoLegend.style.display = 'none';
+            toggleBtn.textContent = '▼';
+        } else {
+            infoLegend.style.display = '';
+            toggleBtn.textContent = '▲';
+        }
+    });
+</script>
+</body>
+</html>
